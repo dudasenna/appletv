@@ -53,41 +53,6 @@ class GameScene: SKScene {
         }
     }
     
-    func movePlayer(toPoint pos: CGPoint) {
-        let xDifference = 2 * self.lastPosition.x - pos.x
-        let yDifference = 2 * self.lastPosition.y - pos.y
-        
-        var turn : TurnPlayer = TurnPlayer.up
-        
-        if xDifference == lastPosition.x && yDifference > lastPosition.y {
-            turn = TurnPlayer.down
-        }
-        else if xDifference == lastPosition.x && yDifference < lastPosition.y {
-            turn = TurnPlayer.up
-        }
-        else if xDifference > lastPosition.x && yDifference == lastPosition.y {
-            turn = TurnPlayer.left
-        }
-        else if xDifference < lastPosition.x && yDifference == lastPosition.y {
-            turn = TurnPlayer.right
-        }
-        else if xDifference > lastPosition.x && yDifference > lastPosition.y {
-            turn = TurnPlayer.rightUp
-        }
-        else if xDifference > lastPosition.x && yDifference < lastPosition.y {
-            turn = TurnPlayer.rightDown
-        }
-        else if xDifference < lastPosition.x && yDifference < lastPosition.y {
-            turn = TurnPlayer.leftDown
-        }
-        else if xDifference < lastPosition.x && yDifference > lastPosition.y {
-            turn = TurnPlayer.leftUp
-        }
-        
-        self.player?.rotarionPlayer(turn: turn, point: pos)
-            
-    }
-    
     func touchMoved(toPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
@@ -115,19 +80,16 @@ class GameScene: SKScene {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             self.touchMoved(toPoint: t.location(in: self))
-            self.movePlayer(toPoint: t.location(in: self))
-            self.lastPosition = t.location(in: self)
-            
-            
-            // TODO: Lógica para movimentar o personagem
-            //      Pegar o movimento ao invés da posição especifica
-            //      Tomar cuidado com a posição inicial (zero?) do personagem, acho que um if resolve
-            
+            self.player?.movePlayer(to: t.location(in: self))
+            self.player?.playerRotation(to: t.location(in: self))
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        for t in touches {
+            self.touchUp(atPoint: t.location(in: self))
+            player?.saveLastPosition()
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
