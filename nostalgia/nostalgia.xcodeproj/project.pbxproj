@@ -16,6 +16,8 @@
 		220516B526656231003AD414 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220516B326656231003AD414 /* Main.storyboard */; };
 		220516B726656233003AD414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220516B626656233003AD414 /* Assets.xcassets */; };
 		220516BA26656233003AD414 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220516B826656233003AD414 /* LaunchScreen.storyboard */; };
+		BE79E523266572AF00494866 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79E522266572AF00494866 /* Player.swift */; };
+		BE79E5252665792D00494866 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79E5242665792D00494866 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		220516B626656233003AD414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		220516B926656233003AD414 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		220516BB26656233003AD414 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE79E522266572AF00494866 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		BE79E5242665792D00494866 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				08CF7C232665669A0029A74D /* ExtensionColor.swift */,
+				BE79E5242665792D00494866 /* Constants.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -80,6 +85,7 @@
 				220516B626656233003AD414 /* Assets.xcassets */,
 				220516B826656233003AD414 /* LaunchScreen.storyboard */,
 				220516BB26656233003AD414 /* Info.plist */,
+				BE79E522266572AF00494866 /* Player.swift */,
 			);
 			path = nostalgia;
 			sourceTree = "<group>";
@@ -159,7 +165,9 @@
 				220516B026656231003AD414 /* GameScene.swift in Sources */,
 				220516B226656231003AD414 /* GameViewController.swift in Sources */,
 				220516AA26656231003AD414 /* AppDelegate.swift in Sources */,
+				BE79E523266572AF00494866 /* Player.swift in Sources */,
 				08CF7C242665669A0029A74D /* ExtensionColor.swift in Sources */,
+				BE79E5252665792D00494866 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

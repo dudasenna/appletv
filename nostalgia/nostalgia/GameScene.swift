@@ -12,8 +12,12 @@ class GameScene: SKScene {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
+    private var player : Player?
+    private var lastPosition : CGPoint = CGPoint()
     
     override func didMove(to view: SKView) {
+        
+        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
@@ -34,6 +38,10 @@ class GameScene: SKScene {
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
         }
+        
+        size = self.frame.size
+        self.player = Player(width: size.width, height: size.height)
+        addChild(player!)
     }
     
     
@@ -45,10 +53,45 @@ class GameScene: SKScene {
         }
     }
     
+    func movePlayer(toPoint pos: CGPoint) {
+        let xDifference = 2 * self.lastPosition.x - pos.x
+        let yDifference = 2 * self.lastPosition.y - pos.y
+        
+        var turn : TurnPlayer = TurnPlayer.up
+        
+        if xDifference == lastPosition.x && yDifference > lastPosition.y {
+            turn = TurnPlayer.down
+        }
+        else if xDifference == lastPosition.x && yDifference < lastPosition.y {
+            turn = TurnPlayer.up
+        }
+        else if xDifference > lastPosition.x && yDifference == lastPosition.y {
+            turn = TurnPlayer.left
+        }
+        else if xDifference < lastPosition.x && yDifference == lastPosition.y {
+            turn = TurnPlayer.right
+        }
+        else if xDifference > lastPosition.x && yDifference > lastPosition.y {
+            turn = TurnPlayer.rightUp
+        }
+        else if xDifference > lastPosition.x && yDifference < lastPosition.y {
+            turn = TurnPlayer.rightDown
+        }
+        else if xDifference < lastPosition.x && yDifference < lastPosition.y {
+            turn = TurnPlayer.leftDown
+        }
+        else if xDifference < lastPosition.x && yDifference > lastPosition.y {
+            turn = TurnPlayer.leftUp
+        }
+        
+        self.player?.rotarionPlayer(turn: turn, point: pos)
+            
+    }
+    
     func touchMoved(toPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
-            n.strokeColor = SKColor.pinkColor
+            n.strokeColor = SKColor.cyan
             self.addChild(n)
         }
     }
@@ -56,7 +99,7 @@ class GameScene: SKScene {
     func touchUp(atPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
-            n.strokeColor = SKColor.yellowColor
+            n.strokeColor = SKColor.white
             self.addChild(n)
         }
     }
@@ -70,7 +113,17 @@ class GameScene: SKScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        for t in touches {
+            self.touchMoved(toPoint: t.location(in: self))
+            self.movePlayer(toPoint: t.location(in: self))
+            self.lastPosition = t.location(in: self)
+            
+            
+            // TODO: Lógica para movimentar o personagem
+            //      Pegar o movimento ao invés da posição especifica
+            //      Tomar cuidado com a posição inicial (zero?) do personagem, acho que um if resolve
+            
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
