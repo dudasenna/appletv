@@ -10,6 +10,8 @@ import SpriteKit
 
 class Player: SKSpriteNode {
     
+    private var lastPosition = CGPoint(x: 0, y: 0)
+    
     init(width: CGFloat, height: CGFloat) {
         let texture = SKTexture(imageNamed: "Player")
         var size = CGSize()
@@ -30,8 +32,10 @@ class Player: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func rotarionPlayer(turn: TurnPlayer, point: CGPoint) {
+    func playerRotation(to pos: CGPoint) {
+        let turn = getTurn(position: pos)
         var angle = CGFloat()
+        
         switch turn {
         case TurnPlayer.up:
             angle = CGFloat.pi
@@ -49,14 +53,59 @@ class Player: SKSpriteNode {
             angle = 3 * CGFloat.pi / 4
         case TurnPlayer.leftDown:
             angle = 5 * CGFloat.pi / 4
-        default:
-            print("Não entrou no switch em rotationPlayer")
         }
         
-        let rotate = SKAction.rotate(toAngle: angle, duration: 0.15, shortestUnitArc: true)
+        let rotate = SKAction.rotate(toAngle: angle, duration: 0, shortestUnitArc: true)
         run(rotate)
+    }
+    
+    func getTurn(position: CGPoint) -> TurnPlayer {
+        let xDifference = 2 * self.lastPosition.x - position.x
+        let yDifference = 2 * self.lastPosition.y - position.y
         
-        position = CGPoint(x: point.x, y: point.y)
+        var turn : TurnPlayer = TurnPlayer.up
+        
+        if xDifference == lastPosition.x && yDifference > lastPosition.y {
+            turn = TurnPlayer.down
+        }
+        else if xDifference == lastPosition.x && yDifference < lastPosition.y {
+            turn = TurnPlayer.up
+        }
+        else if xDifference > lastPosition.x && yDifference == lastPosition.y {
+            turn = TurnPlayer.left
+        }
+        else if xDifference < lastPosition.x && yDifference == lastPosition.y {
+            turn = TurnPlayer.right
+        }
+        else if xDifference > lastPosition.x && yDifference > lastPosition.y {
+            turn = TurnPlayer.rightUp
+        }
+        else if xDifference > lastPosition.x && yDifference < lastPosition.y {
+            turn = TurnPlayer.rightDown
+        }
+        else if xDifference < lastPosition.x && yDifference < lastPosition.y {
+            turn = TurnPlayer.leftDown
+        }
+        else if xDifference < lastPosition.x && yDifference > lastPosition.y {
+            turn = TurnPlayer.leftUp
+        }
+        
+        return turn
+    }
+    
+    func movePlayer(to pos: CGPoint) {
+        let newPosition = mergePoints(point: lastPosition, point: pos)
+        let move = SKAction.move(to: newPosition, duration: 0.5)
+        run(move)
+    }
+    
+    func mergePoints(point p1: CGPoint, point p2: CGPoint) -> CGPoint {
+        let point = CGPoint(x: p1.x + p2.x, y: p1.y + p2.y)
+        return point
+    }
+    
+    func saveLastPosition() {
+        lastPosition = position
     }
     
 }
