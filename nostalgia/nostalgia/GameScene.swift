@@ -81,7 +81,7 @@ class GameScene: SKScene {
         for t in touches {
             self.touchMoved(toPoint: t.location(in: self))
             self.player?.movePlayer(to: t.location(in: self))
-            self.player?.playerRotation(to: t.location(in: self))
+            self.player?.rotate(point: t.location(in: self))
         }
     }
     
