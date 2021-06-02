@@ -87,6 +87,7 @@ class GameScene: SKScene {
     
     @objc func shoot() {
         player?.regularShoot()
+        changeCurrentColor()
     }
     
     public static func setTexture() -> [String] {
@@ -154,7 +155,7 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        changeCurrentColor()
+        //changeCurrentColor()
         
         //player?.regularShoot()
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {

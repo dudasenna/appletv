@@ -31,7 +31,7 @@ class Player: SKSpriteNode {
         superShotInterval = 0.0
         
         let currentTextureColor = GameScene.setTexture()
-        let texture = SKTexture(imageNamed: "\(currentTextureColor[1])Player")
+        let texture = SKTexture(imageNamed: "\(currentTextureColor[0])Player")
         var size = CGSize()
         let percentage = height * 0.1
         size.width = 133 * (percentage / 100)
