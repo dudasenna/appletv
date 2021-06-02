@@ -12,6 +12,25 @@ import GameplayKit
 
 let sizeMultipliers = [0.1, 0.2, 0.3]
 
+func chooseShape (randomNumber: Int, multiplierIndex: Int) -> SKShapeNode {
+    switch randomNumber {
+    case 1:
+        return createTriangle(multiplierIndex: multiplierIndex)
+    case 2:
+        return createSquare(multiplierIndex: multiplierIndex)
+    case 3:
+        return createPentagon(multiplierIndex: multiplierIndex)
+    case 4:
+        return createHexagon(multiplierIndex: multiplierIndex)
+    case 5:
+        return createHeptagon(multiplierIndex: multiplierIndex)
+    case 6:
+        return createOctagon(multiplierIndex: multiplierIndex)
+    default:
+        return createSquare(multiplierIndex: multiplierIndex)
+    }
+}
+
 func createTriangle (multiplierIndex: Int) -> SKShapeNode {
     
     let multiplier = sizeMultipliers[multiplierIndex]

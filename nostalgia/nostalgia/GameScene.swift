@@ -26,29 +26,17 @@ class GameScene: SKScene {
         }
         
         //add shape
-        let shape1 = createTriangle(multiplierIndex: 2)
+        let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
         shape1.position = CGPoint(x: -200, y: 100)
         self.addChild(shape1)
         
-        let shape2 = createSquare(multiplierIndex: 2)
+        let shape2 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
         shape2.position = CGPoint(x: 0, y: 100)
         self.addChild(shape2)
         
-        let shape3 = createPentagon(multiplierIndex: 2)
+        let shape3 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
         shape3.position = CGPoint(x: 200, y: 100)
         self.addChild(shape3)
-        
-        let shape4 = createHexagon(multiplierIndex: 2)
-        shape4.position = CGPoint(x: -200, y: -100)
-        self.addChild(shape4)
-        
-        let shape5 = createHeptagon(multiplierIndex: 2)
-        shape5.position = CGPoint(x: 0, y: -100)
-        self.addChild(shape5)
-        
-        let shape6 = createOctagon(multiplierIndex: 2)
-        shape6.position = CGPoint(x: 200, y: -100)
-        self.addChild(shape6)
         
         // Create shape node to use during mouse interaction
         let w = (self.size.width + self.size.height) * 0.05
