@@ -18,7 +18,7 @@ class Projectile: SKSpriteNode {
         
         // adicionando a cor certa
         let currentTextureColor = GameScene.setTexture()
-        self.texture = SKTexture(imageNamed: "\(currentTextureColor)Shot")
+        self.texture = SKTexture(imageNamed: "\(currentTextureColor[0])Shot")
         
         let dx = CGFloat(cosf(Float(node.zRotation)))
         let dy = CGFloat(sinf(Float(node.zRotation)))

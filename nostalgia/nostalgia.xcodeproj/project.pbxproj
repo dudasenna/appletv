@@ -22,10 +22,8 @@
 		220516B526656231003AD414 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220516B326656231003AD414 /* Main.storyboard */; };
 		220516B726656233003AD414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220516B626656233003AD414 /* Assets.xcassets */; };
 		220516BA26656233003AD414 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220516B826656233003AD414 /* LaunchScreen.storyboard */; };
-		BE79E523266572AF00494866 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79E522266572AF00494866 /* Player.swift */; };
-		BE79E5252665792D00494866 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79E5242665792D00494866 /* Constants.swift */; };
 		22C41DC62666A738008770C5 /* ShapesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C41DC52666A738008770C5 /* ShapesModel.swift */; };
-
+		BE79E5252665792D00494866 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE79E5242665792D00494866 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,10 +44,8 @@
 		220516B626656233003AD414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		220516B926656233003AD414 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		220516BB26656233003AD414 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE79E522266572AF00494866 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
-		BE79E5242665792D00494866 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		22C41DC52666A738008770C5 /* ShapesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesModel.swift; sourceTree = "<group>"; };
-    
+		BE79E5242665792D00494866 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +136,6 @@
 				220516B826656233003AD414 /* LaunchScreen.storyboard */,
 				220516BB26656233003AD414 /* Info.plist */,
 				08CF7C2526656D410029A74D /* Fonts */,
-				BE79E522266572AF00494866 /* Player.swift */,
 			);
 			path = nostalgia;
 			sourceTree = "<group>";
@@ -235,7 +230,6 @@
 				08CF7C242665669A0029A74D /* ExtensionColor.swift in Sources */,
 				083C32FD2666B4B000D4C2DF /* Player.swift in Sources */,
 				083C32F92666B0E800D4C2DF /* PlayerShot.swift in Sources */,
-				BE79E523266572AF00494866 /* Player.swift in Sources */,
 				22C41DC62666A738008770C5 /* ShapesModel.swift in Sources */,
 				08CF7C242665669A0029A74D /* ExtensionColor.swift in Sources */,
 				BE79E5252665792D00494866 /* Constants.swift in Sources */,
