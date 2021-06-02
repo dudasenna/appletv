@@ -20,6 +20,7 @@ extension SKColor {
     static let redColor = SKColor(Color(UIColor(named:"redColor")!))
     static let whiteColor = SKColor(Color(UIColor(named:"whiteColor")!))
     static let yellowColor = SKColor(Color(UIColor(named: "yellowColor")!))
+    static let grayColor = SKColor(Color(UIColor(named: "grayColor")!))
 }
 
 extension Color {
@@ -32,4 +33,5 @@ extension Color {
     static let redColor = Color(UIColor(named:"redColor")!)
     static let whiteColor = Color(UIColor(named:"whiteColor")!)
     static let yellowColor = Color(UIColor(named: "yellowColor")!)
+    static let grayColor = Color(UIColor(named: "grayColor")!)
 }
