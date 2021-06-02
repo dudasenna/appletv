@@ -13,8 +13,11 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
+//    var image = UIImage()
+//    var image = drawCircle()
+    
     override func didMove(to view: SKView) {
-        
+                
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
@@ -22,18 +25,31 @@ class GameScene: SKScene {
             label.run(SKAction.fadeIn(withDuration: 2.0))
         }
         
+        //add shape
+        let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
+        shape1.position = CGPoint(x: -200, y: 100)
+        self.addChild(shape1)
+        
+        let shape2 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
+        shape2.position = CGPoint(x: 0, y: 100)
+        self.addChild(shape2)
+        
+        let shape3 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
+        shape3.position = CGPoint(x: 200, y: 100)
+        self.addChild(shape3)
+        
         // Create shape node to use during mouse interaction
         let w = (self.size.width + self.size.height) * 0.05
+        
         self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
         
         if let spinnyNode = self.spinnyNode {
             spinnyNode.lineWidth = 2.5
             
             spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
+            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.5), SKAction.removeFromParent()]))
         }
+        
     }
     
     

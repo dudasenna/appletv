@@ -16,6 +16,7 @@
 		220516B526656231003AD414 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220516B326656231003AD414 /* Main.storyboard */; };
 		220516B726656233003AD414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 220516B626656233003AD414 /* Assets.xcassets */; };
 		220516BA26656233003AD414 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 220516B826656233003AD414 /* LaunchScreen.storyboard */; };
+		22C41DC62666A738008770C5 /* ShapesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C41DC52666A738008770C5 /* ShapesModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		220516B626656233003AD414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		220516B926656233003AD414 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		220516BB26656233003AD414 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22C41DC52666A738008770C5 /* ShapesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapesModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		220516A826656231003AD414 /* nostalgia */ = {
 			isa = PBXGroup;
 			children = (
+				22DBF2F826657EB500E45C14 /* Model */,
 				08CF7C222665667B0029A74D /* Extensions */,
 				220516A926656231003AD414 /* AppDelegate.swift */,
 				220516AB26656231003AD414 /* GameScene.sks */,
@@ -82,6 +85,14 @@
 				220516BB26656233003AD414 /* Info.plist */,
 			);
 			path = nostalgia;
+			sourceTree = "<group>";
+		};
+		22DBF2F826657EB500E45C14 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				22C41DC52666A738008770C5 /* ShapesModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +170,7 @@
 				220516B026656231003AD414 /* GameScene.swift in Sources */,
 				220516B226656231003AD414 /* GameViewController.swift in Sources */,
 				220516AA26656231003AD414 /* AppDelegate.swift in Sources */,
+				22C41DC62666A738008770C5 /* ShapesModel.swift in Sources */,
 				08CF7C242665669A0029A74D /* ExtensionColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
