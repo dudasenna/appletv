@@ -26,41 +26,40 @@ class GameScene: SKScene {
         }
         
         //add shape
-        let shape1 = createTriangle(multiplierIndex: 0)
-        shape1.position = CGPoint(x: -100, y: 100)
+        let shape1 = createTriangle(multiplierIndex: 2)
+        shape1.position = CGPoint(x: -200, y: 100)
         self.addChild(shape1)
         
-        let shape2 = createSquare(multiplierIndex: 0)
+        let shape2 = createSquare(multiplierIndex: 2)
         shape2.position = CGPoint(x: 0, y: 100)
         self.addChild(shape2)
         
-        let shape3 = createPentagon(multiplierIndex: 0)
-        shape3.position = CGPoint(x: 100, y: 100)
+        let shape3 = createPentagon(multiplierIndex: 2)
+        shape3.position = CGPoint(x: 200, y: 100)
         self.addChild(shape3)
         
-        let shape4 = createHexagon(multiplierIndex: 0)
-        shape4.position = CGPoint(x: -100, y: 0)
+        let shape4 = createHexagon(multiplierIndex: 2)
+        shape4.position = CGPoint(x: -200, y: -100)
         self.addChild(shape4)
         
-        let shape5 = createHeptagon(multiplierIndex: 0)
-        shape5.position = CGPoint(x: 0, y: 0)
+        let shape5 = createHeptagon(multiplierIndex: 2)
+        shape5.position = CGPoint(x: 0, y: -100)
         self.addChild(shape5)
         
-        let shape6 = createOctagon(multiplierIndex: 0)
-        shape6.position = CGPoint(x: 100, y: 0)
+        let shape6 = createOctagon(multiplierIndex: 2)
+        shape6.position = CGPoint(x: 200, y: -100)
         self.addChild(shape6)
         
         // Create shape node to use during mouse interaction
         let w = (self.size.width + self.size.height) * 0.05
         
-//        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-        self.spinnyNode = shape4
+        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
         
         if let spinnyNode = self.spinnyNode {
             spinnyNode.lineWidth = 2.5
             
             spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.5), SKAction.removeFromParent()]))
+            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.5), SKAction.removeFromParent()]))
         }
         
     }
