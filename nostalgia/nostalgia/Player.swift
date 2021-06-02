@@ -15,8 +15,9 @@ class Player: SKSpriteNode {
     init(width: CGFloat, height: CGFloat) {
         let texture = SKTexture(imageNamed: "Player")
         var size = CGSize()
-        size.width = (103 + width + height) * 0.03
-        size.height = (133 + width + height) * 0.03
+        let percentage = height * 0.1
+        size.width = 133 * (percentage / 100)
+        size.height = 103 * (percentage / 100)
         
         super.init(texture: texture, color: .white, size: size)
         
