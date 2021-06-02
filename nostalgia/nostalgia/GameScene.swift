@@ -72,6 +72,10 @@ class GameScene: SKScene {
         size = self.frame.size
         self.player = Player(width: size.width, height: size.height)
         addChild(player!)
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(shoot))
+        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue), NSNumber(value: UIPress.PressType.select.rawValue)]
+        view.addGestureRecognizer(tapRecognizer)
 
     }
     
@@ -79,6 +83,10 @@ class GameScene: SKScene {
         GameScene.currentColor.append(colors.randomElement()!)
         GameScene.currentColor.removeFirst()
         
+    }
+    
+    @objc func shoot() {
+        player?.regularShoot()
     }
     
     public static func setTexture() -> [String] {
@@ -146,7 +154,6 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        player?.regularShoot()
         changeCurrentColor()
         
         //player?.regularShoot()
