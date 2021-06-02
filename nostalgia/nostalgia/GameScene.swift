@@ -21,11 +21,17 @@ class GameScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     private var player : Player?
+    private var lastPosition : CGPoint = CGPoint()
+    
+//    var image = UIImage()
+//    var image = drawCircle()
     
     override func didMove(to view: SKView) {
         GameScene.currentColor = colors.randomElement()!
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         
+        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
         if let label = self.label {
@@ -33,24 +39,39 @@ class GameScene: SKScene {
             label.run(SKAction.fadeIn(withDuration: 2.0))
         }
         
+        //add shape
+        let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
+        shape1.position = CGPoint(x: -200, y: 100)
+        self.addChild(shape1)
+        
+        let shape2 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
+        shape2.position = CGPoint(x: 0, y: 100)
+        self.addChild(shape2)
+        
+        let shape3 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
+        shape3.position = CGPoint(x: 200, y: 100)
+        self.addChild(shape3)
+        
         // Create shape node to use during mouse interaction
         let w = (self.size.width + self.size.height) * 0.05
-        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: 100)
+        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
         
         if let spinnyNode = self.spinnyNode {
             spinnyNode.lineWidth = 2.5
             
             spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5),
-                                              SKAction.fadeOut(withDuration: 0.5),
-                                              SKAction.removeFromParent()]))
+            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.5), SKAction.removeFromParent()]))
         }
-        
-        player = Player(position: CGPoint(x: view.frame.midX-500, y: view.frame.midY-500))
+
+        player1 = Player(position: CGPoint(x: view.frame.midX-500, y: view.frame.midY-500))
         //size = self.frame.size
         //self.player = Player(width: size.width, height: size.height)
+        addChild(player1!)
+
+        size = self.frame.size
+        self.player = Player(width: size.width, height: size.height)
         addChild(player!)
-        
+
     }
     
     func changeCurrentColor() {
@@ -96,7 +117,7 @@ class GameScene: SKScene {
     func touchMoved(toPoint pos : CGPoint) {
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
-            n.strokeColor = SKColor.pinkColor
+            n.strokeColor = SKColor.cyan
             self.addChild(n)
         }
     }
@@ -105,7 +126,7 @@ class GameScene: SKScene {
         //player?.regularShoot()
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
-            n.strokeColor = SKColor.yellowColor
+            n.strokeColor = SKColor.white
             self.addChild(n)
         }
     }
@@ -119,11 +140,18 @@ class GameScene: SKScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
+        for t in touches {
+            self.touchMoved(toPoint: t.location(in: self))
+            self.player?.movePlayer(to: t.location(in: self))
+            self.player?.rotate(point: t.location(in: self))
+        }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
+        for t in touches {
+            self.touchUp(atPoint: t.location(in: self))
+            player?.saveLastPosition()
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
