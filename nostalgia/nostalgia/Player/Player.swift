@@ -73,12 +73,29 @@ class Player: SKSpriteNode {
     func rotate(point: CGPoint) {
         let relativeToStart = CGPoint(x: point.x + lastPosition.x - position.x, y: point.y + lastPosition.y - position.y)
         let radians = atan2(relativeToStart.y, relativeToStart.x)
+        
+        //controle em pe
         let rotateAction = SKAction.rotate(toAngle: radians, duration: 0.1, shortestUnitArc: true)
+        
+        // controle deitado com tiro na mao direita
+        //let rotateAction = SKAction.rotate(toAngle: radians+CGFloat(Double.pi/2.0), duration: 0.1, shortestUnitArc: true)
+        
+        // controle deitado com tiro na mao esquerda
+        //let rotateAction = SKAction.rotate(toAngle: radians-CGFloat(Double.pi/2.0), duration: 0.1, shortestUnitArc: true)
+        
         run(rotateAction)
     }
     
     func movePlayer(to pos: CGPoint) {
+        //controle em pe
         let newPosition = CGPoint(x: lastPosition.x + pos.x, y: lastPosition.y + pos.y)
+        
+        // controle deitado com tiro na mao direita
+        //let newPosition = CGPoint(x: lastPosition.y + pos.y, y: lastPosition.x + pos.x)
+        
+        // controle deitado com tiro na mao esquerda
+        //let newPosition = CGPoint(x: lastPosition.y + pos.y, y: -(lastPosition.x + pos.x))
+        
         let move = SKAction.move(to: newPosition, duration: 3.5)
         run(move)
     }
