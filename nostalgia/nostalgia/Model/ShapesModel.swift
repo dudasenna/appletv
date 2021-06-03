@@ -10,7 +10,7 @@ import CoreGraphics
 import SpriteKit
 import GameplayKit
 
-let sizeMultipliers = [0.1, 0.2, 0.3]
+let sizeMultipliers = [0.2, 0.3, 0.4]
 
 func chooseShape (randomNumber: Int, multiplierIndex: Int) -> SKShapeNode {
     switch randomNumber {
