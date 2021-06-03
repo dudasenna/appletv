@@ -42,15 +42,33 @@ class GameScene: SKScene {
         
         //add shape
         let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
-        shape1.position = CGPoint(x: -200, y: 100)
+        shape1.position = CGPoint(
+            x: randomCoordinate(max: 1000),
+            y: randomCoordinate(max: 800)
+        )
+
+        shape1.run(SKAction.repeatForever(SKAction.move(to: CGPoint(x: randomCoordinate(max: 500), y: randomCoordinate(max: 500)), duration: randomSpeed())))
+        
         self.addChild(shape1)
         
         let shape2 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
-        shape2.position = CGPoint(x: 0, y: 100)
+        shape2.position = CGPoint(
+            x: randomCoordinate(max: 1000),
+            y: randomCoordinate(max: 800)
+        )
+        
+        shape2.run(SKAction.repeatForever(SKAction.move(to: CGPoint(x: randomCoordinate(max: 500), y: randomCoordinate(max: 500)), duration: randomSpeed())))
+        
         self.addChild(shape2)
         
         let shape3 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
-        shape3.position = CGPoint(x: 200, y: 100)
+        shape3.position = CGPoint(
+            x: randomCoordinate(max: 1000),
+            y: randomCoordinate(max: 800)
+        )
+        
+        shape3.run(SKAction.repeatForever(SKAction.move(to: CGPoint(x: randomCoordinate(max: 500), y: randomCoordinate(max: 500)), duration: randomSpeed())))
+        
         self.addChild(shape3)
         
         // Create shape node to use during mouse interaction
@@ -88,6 +106,21 @@ class GameScene: SKScene {
     @objc func shoot() {
         player?.regularShoot()
         changeCurrentColor()
+    }
+    
+    // RANDOM COORDINATE
+    func randomCoordinate(max: CGFloat) -> CGFloat {
+      return CGFloat.random(in: -max...max)
+    }
+    
+    // RANDOM SPEED
+    func randomSpeed() -> Double {
+      return Double.random(in: 0.5...5)
+    }
+    
+    // RANDOM DELAY
+    func randomDelay() -> Double {
+      return Double.random(in: 0...2)
     }
     
     public static func setTexture() -> [String] {
