@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 import SwiftUI
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     public static var currentColor: [Color] = []
     var playerPoints: Int = 0
@@ -23,23 +23,14 @@ class GameScene: SKScene {
     private var player : Player?
     private var lastPosition : CGPoint = CGPoint()
     
-//    var image = UIImage()
-//    var image = drawCircle()
-    
     override func didMove(to view: SKView) {
         GameScene.currentColor.append(colors.randomElement()!)
         GameScene.currentColor.append(colors.randomElement()!)
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        physicsWorld.contactDelegate = self
 
-        // Get label node from scene and store it for use later
-//        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-//        if let label = self.label {
-//            label.alpha = 0.0
-//            label.run(SKAction.fadeIn(withDuration: 2.0))
-//        }
-        
         //add shape
         let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
         shape1.position = CGPoint(x: -200, y: 100)
@@ -53,21 +44,6 @@ class GameScene: SKScene {
         shape3.position = CGPoint(x: 200, y: 100)
         self.addChild(shape3)
         
-        // Create shape node to use during mouse interaction
-//        let w = (self.size.width + self.size.height) * 0.05
-//        self.spinnyNode = SKShapeNode.init(rectOf: CGSize.init(width: w, height: w), cornerRadius: w * 0.3)
-//
-//        if let spinnyNode = self.spinnyNode {
-//            spinnyNode.lineWidth = 2.5
-//
-//            spinnyNode.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
-//            spinnyNode.run(SKAction.sequence([SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.5), SKAction.removeFromParent()]))
-//        }
-
-//        player1 = Player(position: CGPoint(x: view.frame.midX-500, y: view.frame.midY-500))
-//        //size = self.frame.size
-//        //self.player = Player(width: size.width, height: size.height)
-//        addChild(player1!)
 
         size = self.frame.size
         self.player = Player(width: size.width, height: size.height)
@@ -77,6 +53,34 @@ class GameScene: SKScene {
         tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue), NSNumber(value: UIPress.PressType.select.rawValue)]
         view.addGestureRecognizer(tapRecognizer)
 
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let bodiesBitMasks = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        let projectileShapeBitMasks = BitMaskCategories.Projectile.rawValue | BitMaskCategories.Shape.rawValue
+        let playerShapeBitMasks = BitMaskCategories.Player.rawValue | BitMaskCategories.Shape.rawValue
+        
+        let nodeA = contact.bodyA.node
+        let nodeB = contact.bodyB.node
+        
+        if nodeA == nil || nodeB == nil {
+            return
+        }
+        
+        switch bodiesBitMasks {
+        case projectileShapeBitMasks:
+            // nodeA == projectile
+            // nodeB == shape
+            nodeA!.removeFromParent()
+            nodeB!.removeFromParent()
+        case playerShapeBitMasks:
+            // nodeA == shape
+            // nodeB == player
+            nodeA!.removeFromParent()
+        default:
+            print("Entrou no default")
+        }
     }
     
     func changeCurrentColor() {
@@ -111,34 +115,11 @@ class GameScene: SKScene {
                 currentTexture.append("yellow")
             }
         }
-        
-//        if color == .blueColor {
-//            currentTexture = "blue"
-//        } else if color == .greenColor {
-//            currentTexture = "green"
-//        } else if color == .orangeColor {
-//            currentTexture = "orange"
-//        } else if color == .pinkColor {
-//            currentTexture = "pink"
-//        } else if color == .purpleColor {
-//            currentTexture = "purple"
-//        } else if color == .redColor {
-//            currentTexture = "red"
-//        } else if color == .yellowColor {
-//            currentTexture = "yellow"
-//        } else {
-//            // nothing here :)
-//        }
     
         return currentTexture
     }
     
     func touchDown(atPoint pos : CGPoint) {
-//        player?.regularShoot()
-//        changeCurrentColor()
-        
-        //player?.turnLeft()
-        //player?.dash()
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
             n.strokeColor = SKColor.greenColor
@@ -155,9 +136,6 @@ class GameScene: SKScene {
     }
     
     func touchUp(atPoint pos : CGPoint) {
-        //changeCurrentColor()
-        
-        //player?.regularShoot()
         if let n = self.spinnyNode?.copy() as! SKShapeNode? {
             n.position = pos
             n.strokeColor = SKColor.white

@@ -41,34 +41,11 @@ class Player: SKSpriteNode {
         
         physicsBody = SKPhysicsBody(texture: texture, size: size)
         physicsBody?.categoryBitMask = BitMaskCategories.Player.rawValue
-        physicsBody?.collisionBitMask = BitMaskCategories.Player.rawValue
-        physicsBody?.contactTestBitMask = BitMaskCategories.Form.rawValue
+        physicsBody?.collisionBitMask = 0
+        physicsBody?.contactTestBitMask = BitMaskCategories.Shape.rawValue
         physicsBody?.affectedByGravity = false
         
     }
-    
-//    init(position: CGPoint, size: CGSize = CGSize(width: 100, height: 100)) {
-//        lastTimeShot = cooldown
-//        lastTimeSuperShot = superCooldown
-//        superShotInterval = 0.0
-//
-//        let texture = SKTexture(imageNamed: "Assets/bitty-1.png")
-//        super.init(texture: texture, color: .white, size: size)
-//
-//        self.position = position
-//        physicsBody = SKPhysicsBody(rectangleOf: size)
-//
-//        physicsBody?.linearDamping = 15
-//        physicsBody?.angularDamping = 10
-//
-//        zRotation = CGFloat.pi/2
-//
-//        physicsBody?.categoryBitMask = Categories.Player.rawValue
-//        physicsBody?.collisionBitMask = 0
-//        physicsBody?.contactTestBitMask = Categories.Enemy.rawValue
-//
-//        blink()
-//    }
     
     func rotate(point: CGPoint) {
         let relativeToStart = CGPoint(x: point.x + lastPosition.x - position.x, y: point.y + lastPosition.y - position.y)
@@ -97,7 +74,6 @@ class Player: SKSpriteNode {
     }
     
     func regularShoot() {
-        print("atirou more")
         let gameScene = scene as! GameScene
         let projectile = PlayerProjectile(player: self)
         
