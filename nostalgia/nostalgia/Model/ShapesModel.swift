@@ -31,6 +31,27 @@ func chooseShape (randomNumber: Int, multiplierIndex: Int) -> SKShapeNode {
     }
 }
 
+func moveShape(shape: SKShapeNode) {
+    shape.run(SKAction.move(to: CGPoint(x: randomCoordinate(max: 500), y: randomCoordinate(max: 500)), duration: 3), completion: {
+        moveShape(shape: shape)
+    })
+}
+
+// RANDOM COORDINATE
+func randomCoordinate(max: CGFloat) -> CGFloat {
+  return CGFloat.random(in: 0...max)
+}
+
+// RANDOM SPEED
+func randomSpeed() -> Double {
+  return Double.random(in: 0.5...5)
+}
+
+// RANDOM DELAY
+func randomDelay() -> Double {
+  return Double.random(in: 0...2)
+}
+
 func createTriangle (multiplierIndex: Int) -> SKShapeNode {
     
     let multiplier = sizeMultipliers[multiplierIndex]
