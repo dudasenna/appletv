@@ -79,14 +79,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch bodiesBitMasks {
         case projectileShapeBitMasks:
-            // nodeA == projectile
-            // nodeB == shape
             nodeA!.removeFromParent()
             nodeB!.removeFromParent()
         case playerShapeBitMasks:
-            // nodeA == shape
-            // nodeB == player
-            nodeA!.removeFromParent()
+            if nodeA?.frame == self.player!.frame {
+                nodeB!.removeFromParent()
+            } else {
+                nodeA!.removeFromParent()
+            }
         case projectileWallBitMask:
             let waitAction = SKAction.wait(forDuration: 2)
             let removeAction = SKAction.removeFromParent()
