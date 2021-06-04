@@ -22,7 +22,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var spinnyNode : SKShapeNode?
     private var player : Player?
     private var lastPosition : CGPoint = CGPoint()
-    var enimiesLimit = 10
+    var enimiesLimit = 15
+    var currentEnimies = 0
     
     override func didMove(to view: SKView) {
         GameScene.currentColor.append(colors.randomElement()!)
@@ -39,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //add shape
         
-        createShape(current: 0)
+        createShape()
         
 //        let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
 //        shape1.position = CGPoint(
@@ -82,6 +83,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if nodeA!.name == nodeB!.name {
                 nodeA!.removeFromParent()
                 nodeB!.removeFromParent()
+                currentEnimies -= 1
+                createShape()
             }
             
         case playerShapeBitMasks:
@@ -102,8 +105,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func createShape (current: Int) {
-        if current <= enimiesLimit {
+    func createShape () {
+        if currentEnimies <= enimiesLimit {
             let shape = chooseShape(randomNumber: Int.random(in: 1...6), multiplierIndex: Int.random(in: 0...2))
             shape.position = CGPoint(
                 x: randomCoordinate(max: 1000),
@@ -114,8 +117,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.addChild(shape)
             
-            let timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
-                self.createShape(current: current + 1)
+            let timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
+                self.createShape()
             }
         }
     }
