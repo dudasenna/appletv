@@ -32,7 +32,11 @@ func chooseShape (randomNumber: Int, multiplierIndex: Int) -> SKShapeNode {
 }
 
 func moveShape(shape: SKShapeNode) {
-    shape.run(SKAction.move(to: CGPoint(x: randomCoordinate(max: 1600), y: randomCoordinate(max: 900)), duration: 3), completion: {
+    let newPosition = CGPoint(x: randomCoordinate(max: 1600), y: randomCoordinate(max: 900))
+    let x = newPosition.x - shape.position.x
+    let y = newPosition.y - shape.position.y
+    let duration = CGFloat(sqrt(x*x + y*y))
+    shape.run(SKAction.move(to: newPosition, duration: Double(duration)/300), completion: {
         moveShape(shape: shape)
     })
 }
@@ -44,7 +48,7 @@ func randomCoordinate(max: CGFloat) -> CGFloat {
 
 // RANDOM SPEED
 func randomSpeed() -> Double {
-  return Double.random(in: 0.5...5)
+  return Double(1)
 }
 
 // RANDOM DELAY

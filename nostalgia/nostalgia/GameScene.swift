@@ -12,8 +12,6 @@ import SwiftUI
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     public static var currentColor: [Color] = []
-    var playerPoints: Int = 0
-    var playerExtraLife: Int = 3
     var pause: Bool?
     
     var colors: [Color] = [.blueColor, .greenColor, .orangeColor, .pinkColor, .purpleColor, .redColor, .yellowColor]
@@ -25,11 +23,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var enimiesLimit = 15
     var currentEnimies = 0
     
-    override func didMove(to view: SKView) {
-        GameScene.currentColor.append(colors.randomElement()!)
-        GameScene.currentColor.append(colors.randomElement()!)
-        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+    var uiLeft: SKSpriteNode?
+    var uiRight: SKSpriteNode?
+    var pointsLabel: SKLabelNode?
+    var playerPoints: Int = 0 {
+        didSet {
+            pointsLabel!.text = "\(playerPoints)"
+        }
+    }
+    var extralifeLabel: SKLabelNode?
+    var playerExtraLife: Int = 3 {
+        didSet {
+            extralifeLabel!.text = "\(playerExtraLife)x"
+        }
         
+    }
+    
+    override func didMove(to view: SKView) {
+        // UI
+        self.uiRight = SKSpriteNode.init(texture: SKTexture(imageNamed: "uiRight"), size: CGSize(width: 245, height: 79))
+        self.uiRight?.position = CGPoint(x: frame.maxX-100, y: frame.maxY-100)
+        //self.uiRight?.position = CGPoint(x: 0+size.width/2, y: frame.maxY-100)
+        self.uiRight?.zPosition = -3
+        addChild(uiRight!)
+        
+        self.uiLeft = SKSpriteNode.init(texture: SKTexture(imageNamed: "uiLeft"), size: CGSize(width: 245, height: 79))
+        self.uiLeft?.position = CGPoint(x: frame.minX+100, y: frame.maxY-100)
+        //self.uiLeft?.position = CGPoint(x: 0-size.width/2, y: frame.maxY-100)
+        self.uiRight?.zPosition = -3
+        addChild(uiLeft!)
+        
+        // game
+        GameScene.currentColor.append(colors.randomElement()!)
+        GameScene.currentColor.append(colors.randomElement()!)
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
         
@@ -39,20 +65,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
         
         //add shape
-        
         createShape()
         
-//        let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
-//        shape1.position = CGPoint(
-//            x: randomCoordinate(max: 1000),
-//            y: randomCoordinate(max: 800)
-//        )
-//
-//        moveShape(shape: shape1)
-//
-//        self.addChild(shape1)
-        
-        
+        // player
         size = self.frame.size
         self.player = Player(width: size.width, height: size.height)
         addChild(player!)
@@ -60,6 +75,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(shoot))
         tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue), NSNumber(value: UIPress.PressType.select.rawValue)]
         view.addGestureRecognizer(tapRecognizer)
+        
+        
+        // score
+        self.pointsLabel = SKLabelNode(fontNamed: "Bebas Neue")
+        self.pointsLabel?.fontColor = .blackColor
+        self.pointsLabel?.text = "\(playerPoints)"
+        self.pointsLabel?.position = CGPoint(x: frame.maxX-130, y: frame.maxY-117)
+        self.pointsLabel?.fontSize = 60
+        self.pointsLabel?.zPosition = 3
+        addChild(pointsLabel!)
+        
+        // extra life
+        self.extralifeLabel = SKLabelNode(fontNamed: "Bebas Neue")
+        self.extralifeLabel?.fontColor = .blackColor
+        self.extralifeLabel?.text = "\(playerExtraLife)x"
+        self.extralifeLabel?.position = CGPoint(x: frame.minX+120, y: frame.maxY-110)
+        self.extralifeLabel?.fontSize = 40
+        self.extralifeLabel?.zPosition = 3
+        addChild(extralifeLabel!)
         
     }
     
@@ -83,16 +117,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if nodeA!.name == nodeB!.name {
                 nodeA!.removeFromParent()
                 nodeB!.removeFromParent()
+                playerPoints += 1
                 currentEnimies -= 1
                 createShape()
             }
             
         case playerShapeBitMasks:
+            if playerExtraLife > 1 {
+                playerExtraLife -= 1
+            } else {
+                // end game aqui
+            }
+            
             if nodeA?.frame == self.player!.frame {
                 nodeB!.removeFromParent()
             } else {
                 nodeA!.removeFromParent()
             }
+            
         case projectileWallBitMask:
             let waitAction = SKAction.wait(forDuration: 2)
             let removeAction = SKAction.removeFromParent()
@@ -135,7 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     public func randomCoordinate(max: CGFloat) -> CGFloat {
-      return CGFloat.random(in: -max...max)
+        return CGFloat.random(in: -max...max)
     }
     
     public static func setTexture() -> [String] {
