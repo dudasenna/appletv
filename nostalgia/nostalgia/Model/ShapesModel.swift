@@ -32,14 +32,14 @@ func chooseShape (randomNumber: Int, multiplierIndex: Int) -> SKShapeNode {
 }
 
 func moveShape(shape: SKShapeNode) {
-    shape.run(SKAction.move(to: CGPoint(x: randomCoordinate(max: 500), y: randomCoordinate(max: 500)), duration: 3), completion: {
+    shape.run(SKAction.move(to: CGPoint(x: randomCoordinate(max: 1600), y: randomCoordinate(max: 900)), duration: 3), completion: {
         moveShape(shape: shape)
     })
 }
 
 // RANDOM COORDINATE
 func randomCoordinate(max: CGFloat) -> CGFloat {
-  return CGFloat.random(in: 0...max)
+  return CGFloat.random(in: -max...max)
 }
 
 // RANDOM SPEED
