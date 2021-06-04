@@ -25,8 +25,8 @@ class PlayerProjectile: Projectile {
         
         super.init(node: player, size: size, velocity: 275)
         
-        physicsBody?.categoryBitMask = Categories.PlayerProjectile.rawValue
-        physicsBody?.contactTestBitMask = Categories.Enemy.rawValue
+        physicsBody?.categoryBitMask = BitMaskCategories.Projectile.rawValue
+        physicsBody?.contactTestBitMask = BitMaskCategories.Projectile.rawValue
     }
     
     required init?(coder aDecoder: NSCoder) {
