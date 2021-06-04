@@ -10,6 +10,8 @@ import SpriteKit
 import GameplayKit
 
 class GameViewController: UIViewController {
+    
+    var observer: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,17 @@ class GameViewController: UIViewController {
             view.showsFPS = false
             view.showsNodeCount = false
         }
+        
+        observer = NotificationCenter.default.addObserver(forName: NSNotification.Name("teste"), object: nil, queue: OperationQueue.main) {_ in
+            self.perdeu()
+        }
+
+    }
+    
+    func perdeu() {
+        let message = "Sua pontuação: \(GameScene.points)"
+        let alert = UIAlertController(title: "FIM DE JOGO", message: message, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
     }
 
 }
