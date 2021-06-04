@@ -30,6 +30,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
+        
+        physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        physicsBody?.categoryBitMask = BitMaskCategories.Wall.rawValue
+        physicsBody?.collisionBitMask = 0
+        physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
 
         //add shape
         let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
@@ -60,6 +65,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let projectileShapeBitMasks = BitMaskCategories.Projectile.rawValue | BitMaskCategories.Shape.rawValue
         let playerShapeBitMasks = BitMaskCategories.Player.rawValue | BitMaskCategories.Shape.rawValue
+        let projectileWallBitMask = BitMaskCategories.Projectile.rawValue | BitMaskCategories.Wall.rawValue
+        let playerWallBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Wall.rawValue
         
         let nodeA = contact.bodyA.node
         let nodeB = contact.bodyB.node
@@ -78,6 +85,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // nodeA == shape
             // nodeB == player
             nodeA!.removeFromParent()
+        case projectileWallBitMask:
+            let waitAction = SKAction.wait(forDuration: 2)
+            let removeAction = SKAction.removeFromParent()
+            let sequenceAction = SKAction.sequence([waitAction, removeAction])
+            nodeB!.run(sequenceAction)
+        case playerWallBitMask:
+            nodeB!.removeAllActions()
         default:
             print("Entrou no default")
         }
