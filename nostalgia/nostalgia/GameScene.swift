@@ -22,6 +22,7 @@ class GameScene: SKScene {
     private var spinnyNode : SKShapeNode?
     private var player : Player?
     private var lastPosition : CGPoint = CGPoint()
+    var enimiesLimit = 10
     
 //    var image = UIImage()
 //    var image = drawCircle()
@@ -41,17 +42,18 @@ class GameScene: SKScene {
 //        }
         
         //add shape
-        let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
-        shape1.position = CGPoint(x: -200, y: 100)
-        self.addChild(shape1)
         
-        let shape2 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
-        shape2.position = CGPoint(x: 0, y: 100)
-        self.addChild(shape2)
+        createShape(current: 0)
         
-        let shape3 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
-        shape3.position = CGPoint(x: 200, y: 100)
-        self.addChild(shape3)
+//        let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
+//        shape1.position = CGPoint(
+//            x: randomCoordinate(max: 1000),
+//            y: randomCoordinate(max: 800)
+//        )
+//
+//        moveShape(shape: shape1)
+//
+//        self.addChild(shape1)
         
         // Create shape node to use during mouse interaction
 //        let w = (self.size.width + self.size.height) * 0.05
@@ -79,6 +81,24 @@ class GameScene: SKScene {
 
     }
     
+    func createShape (current: Int) {
+        if current <= enimiesLimit {
+            let shape = chooseShape(randomNumber: Int.random(in: 1...6), multiplierIndex: Int.random(in: 0...2))
+            shape.position = CGPoint(
+                x: randomCoordinate(max: 1000),
+                y: randomCoordinate(max: 800)
+            )
+            
+            moveShape(shape: shape)
+            
+            self.addChild(shape)
+            
+            let timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { timer in
+                self.createShape(current: current + 1)
+            }
+        }
+    }
+    
     func changeCurrentColor() {
         GameScene.currentColor.append(colors.randomElement()!)
         GameScene.currentColor.removeFirst()
@@ -88,6 +108,10 @@ class GameScene: SKScene {
     @objc func shoot() {
         player?.regularShoot()
         changeCurrentColor()
+    }
+    
+    public func randomCoordinate(max: CGFloat) -> CGFloat {
+      return CGFloat.random(in: -max...max)
     }
     
     public static func setTexture() -> [String] {
