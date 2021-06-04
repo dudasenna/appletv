@@ -9,8 +9,9 @@ import Foundation
 
 enum BitMaskCategories: UInt32 {
     case Player = 1
-    case Form = 2
+    case Shape = 2
     case Projectile = 4
+    case Wall = 8
 }
 
 enum TurnPlayer: Int {

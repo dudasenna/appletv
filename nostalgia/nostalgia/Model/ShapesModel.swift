@@ -66,6 +66,12 @@ func createTriangle (multiplierIndex: Int) -> SKShapeNode {
     triangleShape.fillColor = .yellowColor
     triangleShape.strokeColor = .yellowColor
     
+    triangleShape.physicsBody = SKPhysicsBody(polygonFrom: triangleShape.path!)
+    
+    triangleShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
+    triangleShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
+    triangleShape.physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
+    
     return triangleShape
 }
 
@@ -83,6 +89,12 @@ func createSquare (multiplierIndex: Int) -> SKShapeNode {
     
     squareShape.fillColor = .pinkColor
     squareShape.strokeColor = .pinkColor
+    
+    squareShape.physicsBody = SKPhysicsBody(polygonFrom: squareShape.path!)
+    
+    squareShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
+    squareShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
+    squareShape.physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
     
     return squareShape
 }
@@ -103,6 +115,12 @@ func createPentagon (multiplierIndex: Int) -> SKShapeNode {
     pentagonShape.fillColor = .blueColor
     pentagonShape.strokeColor = .blueColor
     
+    pentagonShape.physicsBody = SKPhysicsBody(polygonFrom: pentagonShape.path!)
+    
+    pentagonShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
+    pentagonShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
+    pentagonShape.physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
+    
     return pentagonShape
 }
 
@@ -122,6 +140,12 @@ func createHexagon (multiplierIndex: Int) -> SKShapeNode {
     
     hexagonShape.fillColor = .greenColor
     hexagonShape.strokeColor = .greenColor
+    
+    hexagonShape.physicsBody = SKPhysicsBody(polygonFrom: hexagonShape.path!)
+    
+    hexagonShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
+    hexagonShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
+    hexagonShape.physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
     
     return hexagonShape
 }
@@ -144,6 +168,12 @@ func createHeptagon (multiplierIndex: Int) -> SKShapeNode {
     heptagonShape.fillColor = .orangeColor
     heptagonShape.strokeColor = .orangeColor
     
+    heptagonShape.physicsBody = SKPhysicsBody(polygonFrom: heptagonShape.path!)
+    
+    heptagonShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
+    heptagonShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
+    heptagonShape.physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
+    
     return heptagonShape
 }
 
@@ -165,6 +195,12 @@ func createOctagon (multiplierIndex: Int) -> SKShapeNode {
     
     octagonShape.fillColor = .purpleColor
     octagonShape.strokeColor = .purpleColor
+    
+    octagonShape.physicsBody = SKPhysicsBody(polygonFrom: octagonShape.path!)
+    
+    octagonShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
+    octagonShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
+    octagonShape.physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
     
     return octagonShape
 }

@@ -41,34 +41,11 @@ class Player: SKSpriteNode {
         
         physicsBody = SKPhysicsBody(texture: texture, size: size)
         physicsBody?.categoryBitMask = BitMaskCategories.Player.rawValue
-        physicsBody?.collisionBitMask = BitMaskCategories.Player.rawValue
-        physicsBody?.contactTestBitMask = BitMaskCategories.Form.rawValue
+        physicsBody?.collisionBitMask = 0
+        physicsBody?.contactTestBitMask = BitMaskCategories.Shape.rawValue
         physicsBody?.affectedByGravity = false
         
     }
-    
-//    init(position: CGPoint, size: CGSize = CGSize(width: 100, height: 100)) {
-//        lastTimeShot = cooldown
-//        lastTimeSuperShot = superCooldown
-//        superShotInterval = 0.0
-//
-//        let texture = SKTexture(imageNamed: "Assets/bitty-1.png")
-//        super.init(texture: texture, color: .white, size: size)
-//
-//        self.position = position
-//        physicsBody = SKPhysicsBody(rectangleOf: size)
-//
-//        physicsBody?.linearDamping = 15
-//        physicsBody?.angularDamping = 10
-//
-//        zRotation = CGFloat.pi/2
-//
-//        physicsBody?.categoryBitMask = Categories.Player.rawValue
-//        physicsBody?.collisionBitMask = 0
-//        physicsBody?.contactTestBitMask = Categories.Enemy.rawValue
-//
-//        blink()
-//    }
     
     func rotate(point: CGPoint) {
         let relativeToStart = CGPoint(x: point.x + lastPosition.x - position.x, y: point.y + lastPosition.y - position.y)
@@ -77,10 +54,31 @@ class Player: SKSpriteNode {
         run(rotateAction)
     }
     
-    func movePlayer(to pos: CGPoint) {
-        let newPosition = CGPoint(x: lastPosition.x + pos.x, y: lastPosition.y + pos.y)
-        let move = SKAction.move(to: newPosition, duration: 3.5)
-        run(move)
+    func movePlayer(to pos: CGPoint, frame: CGRect) {
+     
+        if position.x < frame.maxX - 50 && position.x > frame.minX+50 && position.y < frame.maxY-50 && position.y > frame.minY+50 {
+            let newPosition = CGPoint(x: lastPosition.x + pos.x, y: lastPosition.y + pos.y)
+            var move = SKAction.move(to: newPosition, duration: 2.5)
+            run(move)
+        } else {
+            removeAllActions()
+            var x: CGFloat = position.x
+            var y: CGFloat = position.y
+            
+            if position.x < 0 {
+                x = x+1
+            } else {
+                x = x-1
+            }
+            
+            if position.y < 0 {
+                y = y+1
+            } else {
+                y = y-1
+            }
+            
+            position =  CGPoint(x: x, y: y)
+        }
     }
     
     func saveLastPosition() {
@@ -97,7 +95,6 @@ class Player: SKSpriteNode {
     }
     
     func regularShoot() {
-        print("atirou more")
         let gameScene = scene as! GameScene
         let projectile = PlayerProjectile(player: self)
         
