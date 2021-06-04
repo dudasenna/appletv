@@ -70,6 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // player
         size = self.frame.size
         self.player = Player(width: size.width, height: size.height)
+        self.player?.zPosition = -4
         addChild(player!)
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(shoot))
@@ -125,8 +126,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case playerShapeBitMasks:
             if playerExtraLife > 1 {
                 playerExtraLife -= 1
+                createShape()
             } else {
                 // end game aqui
+//                let vc = EndGameController()
+//                let storyboard = UIStoryboard(name: "Main", bundle: "endGame")
             }
             
             if nodeA?.frame == self.player!.frame {
@@ -156,8 +160,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             )
             
             moveShape(shape: shape)
-            
+            shape.zPosition = -4
             self.addChild(shape)
+            currentEnimies += 1
             
             let timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { timer in
                 self.createShape()

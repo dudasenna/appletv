@@ -60,6 +60,30 @@
             </objects>
             <point key="canvasLocation" x="-51" y="-82"/>
         </scene>
+        <!--End Game Controller-->
+        <scene sceneID="r4d-Kt-aAI">
+            <objects>
+                <viewController storyboardIdentifier="endGame" id="LKm-LN-Gkc" customClass="EndGameController" customModule="nostalgia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9kX-Tb-pE8"/>
+                        <viewControllerLayoutGuide type="bottom" id="2gl-C1-nc6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L5y-cb-bHM">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg2" translatesAutoresizingMaskIntoConstraints="NO" id="XrY-zi-V6o">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zQ5-XE-xZn"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c8B-31-3C6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-41" y="1599"/>
+        </scene>
         <!--Game Hosting Controller-->
         <scene sceneID="f3a-bE-XqS">
             <objects>
@@ -71,5 +95,6 @@
     </scenes>
     <resources>
         <image name="bg" width="7680" height="4320"/>
+        <image name="bg2" width="7680" height="4320"/>
     </resources>
 </document>

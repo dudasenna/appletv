@@ -33,7 +33,7 @@ class Projectile: SKSpriteNode {
         position = CGPoint(x: px+(dx*(pw/2-size.width/2)), y: py+(dy*(ph/2-size.width/2)))
         zRotation = node.zRotation
         
-        zPosition = -1
+        zPosition = -5
         
         speed = node.speed + 3
         

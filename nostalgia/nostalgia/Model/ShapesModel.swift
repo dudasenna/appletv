@@ -72,6 +72,7 @@ func createTriangle (multiplierIndex: Int) -> SKShapeNode {
     triangleShape.name = "yellow"
     
     triangleShape.physicsBody = SKPhysicsBody(polygonFrom: triangleShape.path!)
+    triangleShape.physicsBody?.isDynamic = false
     
     triangleShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
     triangleShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
@@ -97,6 +98,7 @@ func createSquare (multiplierIndex: Int) -> SKShapeNode {
     squareShape.name = "pink"
     
     squareShape.physicsBody = SKPhysicsBody(polygonFrom: squareShape.path!)
+    squareShape.physicsBody?.isDynamic = false
     
     squareShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
     squareShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
@@ -123,6 +125,7 @@ func createPentagon (multiplierIndex: Int) -> SKShapeNode {
     pentagonShape.name = "blue"
     
     pentagonShape.physicsBody = SKPhysicsBody(polygonFrom: pentagonShape.path!)
+    pentagonShape.physicsBody?.isDynamic = false
     
     pentagonShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
     pentagonShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
@@ -150,9 +153,9 @@ func createHexagon (multiplierIndex: Int) -> SKShapeNode {
     hexagonShape.name = "green"
     
     hexagonShape.physicsBody = SKPhysicsBody(polygonFrom: hexagonShape.path!)
+    hexagonShape.physicsBody?.isDynamic = false
     
     hexagonShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
-    hexagonShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
     hexagonShape.physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
     
     return hexagonShape
@@ -178,9 +181,9 @@ func createHeptagon (multiplierIndex: Int) -> SKShapeNode {
     heptagonShape.name = "orange"
     
     heptagonShape.physicsBody = SKPhysicsBody(polygonFrom: heptagonShape.path!)
+    heptagonShape.physicsBody?.isDynamic = false
     
     heptagonShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
-    heptagonShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
     heptagonShape.physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
     
     return heptagonShape
@@ -207,6 +210,7 @@ func createOctagon (multiplierIndex: Int) -> SKShapeNode {
     octagonShape.name = "purple"
     
     octagonShape.physicsBody = SKPhysicsBody(polygonFrom: octagonShape.path!)
+    octagonShape.physicsBody?.isDynamic = false
     
     octagonShape.physicsBody?.categoryBitMask = BitMaskCategories.Shape.rawValue
     octagonShape.physicsBody?.collisionBitMask = BitMaskCategories.Shape.rawValue
