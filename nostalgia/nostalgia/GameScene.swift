@@ -79,8 +79,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch bodiesBitMasks {
         case projectileShapeBitMasks:
-            nodeA!.removeFromParent()
-            nodeB!.removeFromParent()
+            if nodeA!.name == nodeB!.name {
+                nodeA!.removeFromParent()
+                nodeB!.removeFromParent()
+            }
+            
         case playerShapeBitMasks:
             if nodeA?.frame == self.player!.frame {
                 nodeB!.removeFromParent()

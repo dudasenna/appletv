@@ -58,7 +58,7 @@ class Player: SKSpriteNode {
      
         if position.x < frame.maxX - 50 && position.x > frame.minX+50 && position.y < frame.maxY-50 && position.y > frame.minY+50 {
             let newPosition = CGPoint(x: lastPosition.x + pos.x, y: lastPosition.y + pos.y)
-            var move = SKAction.move(to: newPosition, duration: 2.5)
+            let move = SKAction.move(to: newPosition, duration: 2.5)
             run(move)
         } else {
             removeAllActions()
