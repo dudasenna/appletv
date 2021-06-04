@@ -35,7 +35,7 @@ class Projectile: SKSpriteNode {
         
         zPosition = -1
         
-        speed = node.speed
+        speed = node.speed + 3
         
         physicsBody = circleBody ? SKPhysicsBody(circleOfRadius: size.width/2) : SKPhysicsBody(rectangleOf: size)
         
