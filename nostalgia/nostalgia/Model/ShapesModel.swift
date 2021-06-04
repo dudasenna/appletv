@@ -65,6 +65,7 @@ func createTriangle (multiplierIndex: Int) -> SKShapeNode {
     
     triangleShape.fillColor = .yellowColor
     triangleShape.strokeColor = .yellowColor
+    triangleShape.name = "yellow"
     
     triangleShape.physicsBody = SKPhysicsBody(polygonFrom: triangleShape.path!)
     
@@ -89,6 +90,7 @@ func createSquare (multiplierIndex: Int) -> SKShapeNode {
     
     squareShape.fillColor = .pinkColor
     squareShape.strokeColor = .pinkColor
+    squareShape.name = "pink"
     
     squareShape.physicsBody = SKPhysicsBody(polygonFrom: squareShape.path!)
     
@@ -114,6 +116,7 @@ func createPentagon (multiplierIndex: Int) -> SKShapeNode {
     
     pentagonShape.fillColor = .blueColor
     pentagonShape.strokeColor = .blueColor
+    pentagonShape.name = "blue"
     
     pentagonShape.physicsBody = SKPhysicsBody(polygonFrom: pentagonShape.path!)
     
@@ -140,6 +143,7 @@ func createHexagon (multiplierIndex: Int) -> SKShapeNode {
     
     hexagonShape.fillColor = .greenColor
     hexagonShape.strokeColor = .greenColor
+    hexagonShape.name = "green"
     
     hexagonShape.physicsBody = SKPhysicsBody(polygonFrom: hexagonShape.path!)
     
@@ -167,6 +171,7 @@ func createHeptagon (multiplierIndex: Int) -> SKShapeNode {
     
     heptagonShape.fillColor = .orangeColor
     heptagonShape.strokeColor = .orangeColor
+    heptagonShape.name = "orange"
     
     heptagonShape.physicsBody = SKPhysicsBody(polygonFrom: heptagonShape.path!)
     
@@ -195,6 +200,7 @@ func createOctagon (multiplierIndex: Int) -> SKShapeNode {
     
     octagonShape.fillColor = .purpleColor
     octagonShape.strokeColor = .purpleColor
+    octagonShape.name = "purple"
     
     octagonShape.physicsBody = SKPhysicsBody(polygonFrom: octagonShape.path!)
     
