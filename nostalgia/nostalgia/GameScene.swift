@@ -35,7 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsBody?.categoryBitMask = BitMaskCategories.Wall.rawValue
         physicsBody?.collisionBitMask = 0
         physicsBody?.contactTestBitMask = BitMaskCategories.Player.rawValue | BitMaskCategories.Projectile.rawValue
-
+        
         //add shape
         let shape1 = chooseShape(randomNumber: Int.random(in: 1 ... 6), multiplierIndex: Int.random(in: 0 ... 2))
         shape1.position = CGPoint(x: -200, y: 100)
@@ -49,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         shape3.position = CGPoint(x: 200, y: 100)
         self.addChild(shape3)
         
-
+        
         size = self.frame.size
         self.player = Player(width: size.width, height: size.height)
         addChild(player!)
@@ -57,7 +57,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(shoot))
         tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue), NSNumber(value: UIPress.PressType.select.rawValue)]
         view.addGestureRecognizer(tapRecognizer)
-
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -129,7 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 currentTexture.append("yellow")
             }
         }
-    
+        
         return currentTexture
     }
     
@@ -168,7 +168,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             self.touchMoved(toPoint: t.location(in: self))
-            self.player?.movePlayer(to: t.location(in: self))
+            self.player?.movePlayer(to: t.location(in: self), frame: frame)
             self.player?.rotate(point: t.location(in: self))
         }
     }
@@ -192,7 +192,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-     
+    
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         for item in presses {
             if item.type == .playPause {
@@ -201,11 +201,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-     
+    
     override func pressesChanged(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         // ignored
     }
-     
+    
     override func pressesCancelled(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         for item in presses {
             if item.type == .playPause {

@@ -54,10 +54,31 @@ class Player: SKSpriteNode {
         run(rotateAction)
     }
     
-    func movePlayer(to pos: CGPoint) {
-        let newPosition = CGPoint(x: lastPosition.x + pos.x, y: lastPosition.y + pos.y)
-        let move = SKAction.move(to: newPosition, duration: 3.5)
-        run(move)
+    func movePlayer(to pos: CGPoint, frame: CGRect) {
+     
+        if position.x < frame.maxX - 50 && position.x > frame.minX+50 && position.y < frame.maxY-50 && position.y > frame.minY+50 {
+            let newPosition = CGPoint(x: lastPosition.x + pos.x, y: lastPosition.y + pos.y)
+            var move = SKAction.move(to: newPosition, duration: 2.5)
+            run(move)
+        } else {
+            removeAllActions()
+            var x: CGFloat = position.x
+            var y: CGFloat = position.y
+            
+            if position.x < 0 {
+                x = x+1
+            } else {
+                x = x-1
+            }
+            
+            if position.y < 0 {
+                y = y+1
+            } else {
+                y = y-1
+            }
+            
+            position =  CGPoint(x: x, y: y)
+        }
     }
     
     func saveLastPosition() {
