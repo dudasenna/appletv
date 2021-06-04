@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var uiLeft: SKSpriteNode?
     var uiRight: SKSpriteNode?
     var pointsLabel: SKLabelNode?
+    public static var points = 0
     var playerPoints: Int = 0 {
         didSet {
             pointsLabel!.text = "\(playerPoints)"
@@ -129,8 +130,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 createShape()
             } else {
                 // end game aqui
+
+                GameScene.points = self.playerPoints
+                NotificationCenter.default.post(name: Notification.Name("teste"), object: nil)
+
 //                let vc = EndGameController()
 //                let storyboard = UIStoryboard(name: "Main", bundle: "endGame")
+
             }
             
             if nodeA?.frame == self.player!.frame {
@@ -161,6 +167,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             moveShape(shape: shape)
             shape.zPosition = -4
+            //shape.run(SKAction.repeatForever(SKAction.rotate(byAngle: CGFloat(Double.pi), duration: 1)))
             self.addChild(shape)
             currentEnimies += 1
             
